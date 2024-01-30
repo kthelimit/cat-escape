@@ -1,15 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 
     public float radius = 1f;
     private CatEscapeGameDirector gameDirector;
+    [SerializeField] Button btnLeft;
+    [SerializeField] Button btnRight;
+
     void Start()
     {
         this.gameDirector = GameObject.FindObjectOfType<CatEscapeGameDirector>();
+        //this.btnLeft.onClick.AddListener(this.LeftButtonClick);
+        //this.btnRight.onClick.AddListener(this.RightButtonClick);
+
+        this.btnLeft.onClick.AddListener(() => {
+            Debug.Log("왼쪽 화살표 버튼 클릭");
+            transform.Translate(-2, 0, 0);
+        });
+        this.btnRight.onClick.AddListener(() => {
+            Debug.Log("오른쪽 화살표 버튼 클릭");
+            transform.Translate(2, 0, 0);
+        });
     }
 
     void Update()
@@ -41,5 +56,15 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(this.transform.position, this.radius);
+    }
+
+    public void LeftButtonClick()
+    {
+        Debug.Log("Left Button Clicked!");
+    }
+
+    public void RightButtonClick()
+    {
+        Debug.Log("Right Button Clicked!");
     }
 }
