@@ -13,6 +13,7 @@ public class CatController : MonoBehaviour
     [SerializeField] private ClimbCloudGameDirector gameDirector;
     private Animator anim;
     bool isCollission = false;
+    [SerializeField] bool isContacted = false;
 
     private void Start()
     {
@@ -25,7 +26,7 @@ public class CatController : MonoBehaviour
     void Update()
     {
         //스페이스바를 누르면 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isContacted)
         {
             //힘을 가한다.
             this.rbody.AddForce(this.transform.up * this.jumpForce);
@@ -72,6 +73,8 @@ public class CatController : MonoBehaviour
         //anim.speed = this.rbody.velocity.x;
         anim.speed = Mathf.Abs(this.rbody.velocity.x) * 0.5f;
         this.gameDirector.UpdateVelocityText(this.rbody.velocity);
+        //this.gameDirector.UpdateIsJumpingText(this.rbody.velocity);
+        this.transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, -2.4f, 2.4f), this.transform.position.y, this.transform.position.z);
     }
 
     //Trigger모드일 경우 충돌 판정을 해주는 이벤트 함수
@@ -85,5 +88,19 @@ public class CatController : MonoBehaviour
 
         //장면을 전환
         SceneManager.LoadScene("ClimbCloudClear");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isContacted = true;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        isContacted = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        isContacted = false;
     }
 }
