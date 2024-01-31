@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CatController : MonoBehaviour
 {
@@ -9,9 +11,13 @@ public class CatController : MonoBehaviour
     [SerializeField] private float jumpForce = 680f;
 
     [SerializeField] private ClimbCloudGameDirector gameDirector;
+    private Animator anim;
+    bool isCollission = false;
 
     private void Start()
     {
+        //this.gameObject.GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         //this.gameDirector = GameObject.Find("GameDirector").GetComponent<ClimbCloudGameDirector>();
         //this.gameDirector = GameObject.FindObjectOfType<ClimbCloudGameDirector>();
     }
@@ -40,7 +46,7 @@ public class CatController : MonoBehaviour
             dirX = 1;
         }
 
-        Debug.Log(dirX);
+        //Debug.Log(dirX);
 
         //고양이가 이동하는 방향쪽을 쳐다보기.
         //dirX가 0이 아닐때만 방향 바꾸기를 하자.
@@ -50,7 +56,7 @@ public class CatController : MonoBehaviour
         }
 
         //벡터의 곱
-        Debug.Log(this.transform.right * dirX); //벡터3
+        //Debug.Log(this.transform.right * dirX); //벡터3
 
         //도전 ! : 속도를 제한하자
         // Mathf.Abs(this.rbody.velocity.x);
@@ -61,7 +67,23 @@ public class CatController : MonoBehaviour
         }
         //this.rbody.velocity = new Vector2(Mathf.Clamp(this.rbody.velocity.x, -3, 3), this.rbody.velocity.y);
 
-        this.gameDirector.UpdateVelocityText(this.rbody.velocity);
 
+        //플레이어 이동속도에 따라 애니메이션 속도를 조절하자.
+        //anim.speed = this.rbody.velocity.x;
+        anim.speed = Mathf.Abs(this.rbody.velocity.x) * 0.5f;
+        this.gameDirector.UpdateVelocityText(this.rbody.velocity);
+    }
+
+    //Trigger모드일 경우 충돌 판정을 해주는 이벤트 함수
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isCollission) return;
+        isCollission = true;
+
+        //최초 충돌할때 한번만 호출
+        Debug.LogFormat("OnTriggerEnter2D : {0}", collision);
+
+        //장면을 전환
+        SceneManager.LoadScene("ClimbCloudClear");
     }
 }
