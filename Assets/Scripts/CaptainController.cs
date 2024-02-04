@@ -16,11 +16,6 @@ public class CaptainController : MonoBehaviour
         this.anim = GetComponentInChildren<Animator>();
     }
 
-    void Update()
-    {
-
-    }
-
     public void GetHit()
     {
         hp--;

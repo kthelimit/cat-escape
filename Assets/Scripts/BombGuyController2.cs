@@ -12,9 +12,11 @@ public class BombGuyController2 : MonoBehaviour
     [SerializeField] Animator anim;
     [SerializeField] Rigidbody2D rbody;
     [SerializeField] float jumpForce = 200f;
-    [SerializeField] float runForce = 200f;
+    [SerializeField] float runForce = 2f;
     [SerializeField] bool isJump = false;
-    bool isAttack = false;
+    [SerializeField] bool isAttack = false;
+    [SerializeField] GameObject bombPrefab;
+    float h;
 
     void Start()
     {
@@ -24,71 +26,65 @@ public class BombGuyController2 : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             ThrowBomb();
         }
-        if (!isAttack)
-        {
-            Move();
-        }
+        Move();
+
+
         CheckJump();
     }
 
     private void CheckJump()
     {
-        if (this.rbody.velocity.y == 0)
+        if (this.rbody.velocity.y >= -0.1f&& this.rbody.velocity.y <= 0.1f)
         {
             isJump = false;
         }
         else
         {
+            anim.SetInteger("State", (int)State.Jump);
             isJump = true;
         }
     }
 
     private void Move()
     {
-        int dir = 0;
-        //이동
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            dir = -1;
-        }
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            dir = 1;
-        }
+        h = Input.GetAxisRaw("Horizontal");
+
+        int dir = (int)h;
+        //점프
         if (Input.GetKeyDown(KeyCode.Space) && !isJump)
-        {
-            this.rbody.AddForce(this.transform.up * jumpForce);
+        {            
+            this.rbody.AddForce(this.transform.up * jumpForce);            
         }
         //애니메이션 컨트롤러
-        if (dir != 0)
+        if (dir != 0 && !isJump)
         {
             this.transform.GetChild(0).localScale = new Vector3(dir, 1, 1);
             anim.SetInteger("State", (int)State.Run);
         }
-        else
+        else if (!isJump)
         {
             anim.SetInteger("State", (int)State.Idle);
         }
-        if (Mathf.Abs(rbody.velocity.x) < 3)
+        //이동
+        if (!isAttack)
         {
-            this.rbody.AddForce(this.transform.right * dir * runForce);
+            this.transform.Translate(Vector2.right * h * Time.deltaTime * runForce);
         }
     }
 
     private void ThrowBomb()
     {
+        isAttack = true;
+        anim.SetTrigger("Attack");
         Debug.Log("던진다 폭탄~!");
+        GameObject go = Instantiate(bombPrefab);
+        go.transform.position = transform.position;
+        isAttack = false;
+        Debug.Log(isAttack);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag=="Enemy")
-        {
-            collision.transform.GetComponent<CaptainController>().GetHit();
-        }
-    }
 }

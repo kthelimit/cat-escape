@@ -650,7 +650,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 1, g: 0.83087283, b: 0.4575472, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -755,9 +755,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
   rbody: {fileID: 0}
-  jumpForce: 400
-  runForce: 2
+  jumpForce: 600
+  runForce: 3
   isJump: 0
+  isAttack: 0
+  bombPrefab: {fileID: 1789289192353110519, guid: bc90b577c55b245418835cfe150863c1, type: 3}
 --- !u!61 &1754081613
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -818,7 +820,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
