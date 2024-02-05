@@ -123,6 +123,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &660252708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 660252710}
+  - component: {fileID: 660252709}
+  m_Layer: 0
+  m_Name: GameDataManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &660252709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660252708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5645120763c59547ae7d9ceb67cad80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  appleCount: 0
+  bombCount: 0
+--- !u!4 &660252710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660252708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &697650795
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,12 +267,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1069b470ef8e43642b489e45d0ca3a12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 1933045111}
+  timeText: {fileID: 0}
   leftTime: 60
-  scoreText: {fileID: 1476709450}
+  scoreText: {fileID: 0}
   score: 0
-  appleCount: 0
-  bombCount: 0
 --- !u!4 &817488248
 Transform:
   m_ObjectHideFlags: 0
@@ -869,7 +914,7 @@ GameObject:
   - component: {fileID: 5939795286098531771}
   - component: {fileID: 2617660773888737484}
   - component: {fileID: 5939795286098531772}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +948,7 @@ GameObject:
   - component: {fileID: 1970362075775367355}
   - component: {fileID: 5398150601688499286}
   - component: {fileID: 5398150601688499287}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1013,7 +1058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6880585878412509543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: stage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1269,3 +1314,4 @@ SceneRoots:
   - {fileID: 1448654975}
   - {fileID: 697650798}
   - {fileID: 817488248}
+  - {fileID: 660252710}

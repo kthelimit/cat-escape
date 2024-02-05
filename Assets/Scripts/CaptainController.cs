@@ -9,7 +9,7 @@ public class CaptainController : MonoBehaviour
         Idle, Hit, Dead
     }
     public float hp = 2f;
-    private float maxHp = 2f;
+    //private float maxHp = 2f;
     [SerializeField] Animator anim;
     void Start()
     {

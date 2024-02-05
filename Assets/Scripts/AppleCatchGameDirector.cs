@@ -8,15 +8,15 @@ using UnityEngine.SceneManagement;
 public class AppleCatchGameDirector : MonoBehaviour
 {
     public static AppleCatchGameDirector Instance;
+    AppleCatchGameDataManager gameDataManager;
     [SerializeField] Text timeText;
     [SerializeField] float leftTime = 60;
     [SerializeField] Text scoreText;
     [SerializeField] float score = 0;
-    [SerializeField] int appleCount = 0;
-    [SerializeField] int bombCount = 0;
 
     private void Awake()
     {
+        
         if (AppleCatchGameDirector.Instance == null)
         {
             AppleCatchGameDirector.Instance = this;
@@ -26,12 +26,17 @@ public class AppleCatchGameDirector : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        gameDataManager = GameObject.FindAnyObjectByType<AppleCatchGameDataManager>();
     }
     private void Start()
     {
+        timeText = GameObject.Find("timeCount").GetComponent<Text>();
+        scoreText = GameObject.Find("Score").GetComponent<Text>();
+        leftTime = 60f;
+        score = 0;
         UpdateScore();
     }
-
+ 
     // Update is called once per frame
     void Update()
     {
@@ -42,20 +47,21 @@ public class AppleCatchGameDirector : MonoBehaviour
     public void GetApple()
     {
         score += 100f;
-        appleCount++;
+        gameDataManager.appleCount++;
         UpdateScore();
     }
 
     public void GetBomb()
     {
         score *= 0.5f;
-        bombCount++;
+        gameDataManager.bombCount++;
         UpdateScore();
     }
 
     void UpdateScore()
     {
         scoreText.text = "Á¡¼ö : " + ((int)score).ToString();
+        gameDataManager.score = this.score;
     }
 
     void UpdateTime()

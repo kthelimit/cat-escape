@@ -5,13 +5,13 @@ using UnityEngine;
 public class BamsongiController : MonoBehaviour
 {
     private Rigidbody rbody;
-    private ParticleSystem particleSystem;
+    private ParticleSystem particleSys;
     public Vector3 direct;
     void Start()
     {
         //this.gameObject.GetComponent<Rigidbody>();
         this.rbody = this.GetComponent<Rigidbody>();
-        this.particleSystem = this.GetComponent<ParticleSystem>();
+        this.particleSys = this.GetComponent<ParticleSystem>();
         this.Shoot();
     }
 
@@ -20,7 +20,7 @@ public class BamsongiController : MonoBehaviour
         Debug.LogFormat("OnCollisionEnter: {0}",collision.gameObject.name);
         rbody.isKinematic = true;
         //파티클시스템 컴포넌트 접근해서 Play 메서드 호출
-        this.particleSystem.Play();
+        this.particleSys.Play();
     }
     
     public void Shoot()

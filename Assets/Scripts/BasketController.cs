@@ -22,15 +22,11 @@ public class BasketController : MonoBehaviour
 
             //지역변수 RaycastHit hit정의
             RaycastHit hit;
+            int layerMask = 1 << LayerMask.NameToLayer("Position");
 
             //if문 작성 Physics.Raycast는 Ray와 콜라이더가 충돌했을 때 true를 반환, 그렇지 않으면 False 반환함
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, 20))
-            {
-                if (hit.collider.gameObject.tag == "Apple" || hit.collider.gameObject.tag == "Bomb")
-                {
-                    return;
-                }
-
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, 20,layerMask))
+            {                
                 //레이와 콜라이더가 충돌했다면
                 //바구니의 위치를 움직인다.
                 int x = Mathf.RoundToInt(hit.point.x);
