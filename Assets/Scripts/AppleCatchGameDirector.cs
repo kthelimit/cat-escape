@@ -75,10 +75,6 @@ public class AppleCatchGameDirector : MonoBehaviour
     {
         TimeSpan timeSpan = TimeSpan.FromSeconds(leftTime);
         string t = string.Format("{0:00}:{1:00}", timeSpan.Seconds, timeSpan.Milliseconds);
-        if (timeText == null)
-        {
-            return;
-        }
         timeText.text = t.Substring(0, 5);
         if (leftTime <= 0)
         {
