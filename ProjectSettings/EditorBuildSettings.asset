@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AppleCatchClear.unity
     guid: 52267c748228255448ffba0c57418a66
+  - enabled: 1
+    path: Assets/Scenes/AppleCatchSelect.unity
+    guid: cad0621018fba3649b2a279b222a76d9
   m_configObjects: {}

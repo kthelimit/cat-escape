@@ -20,9 +20,9 @@ public class AppleCatchClearMain : MonoBehaviour
         bombText.text = "¸ÂÀº ÆøÅº : " + gameDataManager.bombCount.ToString() + "°³";
         scoreText.text = "Á¡¼ö : " + gameDataManager.score.ToString();
         reloadBtn.onClick.AddListener(() => {           
-            Destroy(gameDataManager.gameObject);
+            //Destroy(gameDataManager.gameObject);
             Destroy(gameDirector.gameObject);
-            SceneManager.LoadScene("AppleCatch");
+            SceneManager.LoadScene("AppleCatchSelect");
         });
     }
 
